@@ -25,6 +25,19 @@ import {
 
 import { LoadingBarRouterModule } from '@ngx-loading-bar/router';
 import { NgScrollbarModule } from 'ngx-scrollbar';
+import { CategoryFormComponent } from './pages/category/category-form/category-form.component';
+import { CategoryListComponent } from './pages/category/category-list/category-list.component';
+import { PaymentListComponent } from './pages/payment/payment-list/payment-list.component';
+import { PaymentFormComponent } from './pages/payment/payment-form/payment-form.component';
+import { UserFormComponent } from './pages/user-role/user-form/user-form.component';
+import { UserListComponent } from './pages/user-role/user-list/user-list.component';
+import { RoleListComponent } from './pages/user-role/role-list/role-list.component';
+import { RoleFormComponent } from './pages/user-role/role-form/role-form.component';
+import { ProductFormComponent } from './pages/product/product-form/product-form.component';
+import { ProductListComponent } from './pages/product/product-list/product-list.component';
+import { OrderFormComponent } from './pages/order/order-form/order-form.component';
+import { OrderListComponent } from './pages/order/order-list/order-list.component';
+import { ToastrModule } from 'ngx-toastr';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, 'assets/i18n/', '.json');
@@ -39,6 +52,19 @@ export function createTranslateLoader(http: HttpClient) {
     RightSidebarComponent,
     AuthLayoutComponent,
     MainLayoutComponent,
+    CategoryFormComponent,
+    CategoryListComponent,
+    PaymentListComponent,
+    PaymentFormComponent,
+    UserFormComponent,
+    UserListComponent,
+    RoleListComponent,
+    RoleFormComponent,
+    ProductFormComponent,
+    ProductListComponent,
+    OrderFormComponent,
+    OrderListComponent,
+ 
   ],
   imports: [
     BrowserModule,
@@ -54,11 +80,11 @@ export function createTranslateLoader(http: HttpClient) {
         deps: [HttpClient],
       },
     }),
+    ToastrModule.forRoot(), 
     CoreModule,
     SharedModule,
   ],
   providers: [
-    { provide: LocationStrategy, useClass: HashLocationStrategy },
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
     fakeBackendProvider,

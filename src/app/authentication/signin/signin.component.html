@@ -1,93 +1,95 @@
-  <div class="container-fluid p-0">
-    <div class="row g-0">
-      <div class="col-lg-4">
-        <div class="auth-content p-4 d-flex align-items-center min-vh-100">
-          <div class="w-100">
-            <div class="row justify-content-center">
-              <div class="col-lg-9">
-                <div>
-                  <div class="text-center">
-                    <div>
-                      <a routerLink="" class="logo-full"><img src="assets/images/logo-full.png" alt="logo-full"></a>
+<div class="container-fluid p-0">
+  <div class="row no-gutters">
+    <div class="col-lg-4 p-0">
+      <div class="auth-content p-4 d-flex align-items-center min-vh-100">
+        <div class="w-100">
+          <div class="row justify-content-center">
+            <div class="col-lg-9">
+              <div>
+                <div class="text-center">
+                  <div>
+                    <a routerLink="" class="logo-full">
+                      <img src="../../../assets/images/vshopkh.jpg" height="75px" width="75px"
+                        style="border-radius: 10px;" alt="logo-full">
+                    </a>
+                  </div>
+
+                  <h4 class="font-20 mt-0">Welcome Back !</h4>
+                  <p class="text-muted">Sign in to continue to VSHOPKH</p>
+                </div>
+
+                <div class="p-2 mt-2">
+                  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+                    <div *ngIf="error" class="alert alert-danger mb-3 mt-0">{{error}}</div>
+                    <div class="form-group auth-form-group mb-4">
+                      <mat-icon matSuffix class="auth-page-icon">person</mat-icon>
+                      <input formControlName="email" class="form-control auth-control" id="email"
+                        placeholder="Username" [ngClass]="{ 'is-invalid': submitted && f.email.errors }">
+                      <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+                        <div *ngIf="f.email.errors">Username is required</div>
+                      </div>
                     </div>
 
-                    <h4 class="font-20 mt-4">Welcome Back !</h4>
-                    <p class="text-muted">Sign in to continue to Atrio.</p>
-                  </div>
-
-                  <div class="p-2 mt-5">
-                    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-                      <div *ngIf="error" class="alert alert-danger mb-3 mt-0">{{error}}</div>
-                      <div class="form-group auth-form-group mb-4">
-                        <mat-icon matSuffix class="auth-page-icon">email</mat-icon>
-                        <input type="email" formControlName="email" class="form-control auth-control" id="email"
-                          placeholder="Email" [ngClass]="{ 'is-invalid': submitted && form['email'].errors }">
-                        <div *ngIf="submitted && form['email'].errors" class="invalid-feedback">
-                          <div *ngIf="form['email'].errors['required']">Email is required</div>
-                          <div *ngIf="form['email'].errors['email']">Email must be a valid email address</div>
-                        </div>
+                    <div class="form-group auth-form-group mb-4 box_input_pass">
+                      <mat-icon matSuffix class="auth-page-icon">vpn_key</mat-icon>
+                      <input type="{{ showPassword ? 'text' : 'password' }}" formControlName="password"
+                        class="form-control auth-control" id="password"
+                        [ngClass]="{ 'is-invalid': submitted && f.password.errors }" placeholder="Password" />
+                      <button class="btn_click_hide" mat-icon-button type="button" (click)="togglePasswordVisibility()">
+                        <mat-icon style="color: rgb(103, 102, 102);">{{ showPassword ? 'visibility_off' : 'visibility'
+                          }}</mat-icon>
+                      </button>
+                      <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+                        <div *ngIf="f.password.errors">Password is required</div>
                       </div>
+                    </div>
 
-                      <div class="form-group auth-form-group mb-4">
-                        <mat-icon matSuffix class="auth-page-icon">vpn_key</mat-icon>
-                        <input type="password" formControlName="password" class="form-control auth-control"
-                          id="password" [ngClass]="{ 'is-invalid': submitted && form['password'].errors }"
-                          placeholder="Password" />
-                        <div *ngIf="submitted && form['password'].errors" class="invalid-feedback">
-                          <div *ngIf="form['password'].errors['required']">Password is required</div>
-                        </div>
+                    <!-- <div class="flex-sb-m w-full p-t-15 p-b-20">
+                      <div class="form-check">
+                        <label class="form-check-label">
+                          <input class="form-check-input custom-checkbox" type="checkbox" formControlName="remember"
+                            value=""> Remember me
+                          <span class="form-check-sign">
+                            <span class="check"></span>
+                          </span>
+                        </label>
                       </div>
-
-                      <div class="flex-sb-m w-full p-t-15 p-b-20">
-                        <div class="form-check">
-                          <label class="form-check-label">
-                            <input class="form-check-input" type="checkbox" value=""> Remember me
-                            <span class="form-check-sign">
-                              <span class="check"></span>
-                            </span>
-                          </label>
-                        </div>
-                        <div>
-                          <a class="txt1" routerLink="/authentication/forgot-password">Forgot Password?</a>
-                        </div>
+                      <div>
+                        <a class="txt1" routerLink="/authentication/forgot-password">Forgot Password?</a>
                       </div>
+                    </div> -->
 
-                      <div class="container-login100-form-btn">
-                        <button mat-raised-button color="primary" class="login100-form-btn" type="submit">
+                    <div class="container-login100-form-btn mb-2">
+                      <button [disabled]="!loginForm.valid || submitted" mat-flat-button color="primary"
+                        class="login100-form-btn" type="submit">
+                        <span *ngIf="!submitted">
                           Login
-                        </button>
-                      </div>
-                    </form>
-                  </div>
+                        </span>
+                        <div *ngIf="submitted" class="lds-dual-ring"></div>
+                      </button>
+                    </div>
 
-                  <div class="mt-5 text-center">
-                    <p>Don't have an account ? <a routerLink="/authentication/signup"
-                        class="font-weight-medium text-primary">
-                        Register </a> </p>
-                    <ul class="list-unstyled social-icon mb-0 mt-3">
-                      <li class="list-inline-item m-2"><a href="javascript:void(0)" class="rounded">
-                          <i class="fab fa-google"></i>
-                        </a></li>
-                      <li class="list-inline-item m-2"><a href="javascript:void(0)" class="rounded flex-c-m">
-                          <i class="fab fa-facebook-f"></i>
-                        </a></li>
-                      <li class="list-inline-item m-2"><a href="javascript:void(0)" class="rounded">
-                          <i class="fab fa-twitter"></i>
-                        </a></li>
-                      <li class="list-inline-item m-2"><a href="javascript:void(0)" class="rounded">
-                          <i class="fab fa-linkedin-in"></i>
-                        </a></li>
-                    </ul>
-                  </div>
+                    <!-- <div *ngIf="errorStatus === 401" class="alert alert-danger" role="alert">
+                      Invalid username or password!
+                    </div> -->
+
+                  </form>
+
                 </div>
               </div>
             </div>
           </div>
+          <div class="text-center">
+            <p class="footer_label"><span>Copyright © 2024</span> GBS Technology Co., Ltd</p>
+          </div>
         </div>
       </div>
-      <div class="col-lg-8">
-        <div class="auth-bg">
-          <div class="bg-overlay"></div>
+    </div>
+    <div class="col-lg-8 p-0">
+
+      <div class="auth-bg">
+        <div class="auth-bg"
+          style="object-fit: cover; filter: brightness(70%); background-image : url('../../../assets/images/logo_vshopkh.png')">
         </div>
       </div>
     </div>

@@ -18,6 +18,13 @@ const routes: Routes = [
           import('./dashboard/dashboard.module').then((m) => m.DashboardModule),
       },
       {
+        path: 'user',
+        loadChildren: () =>
+          import('./user/user.module').then(
+            (m) => m.UserModule
+          ),
+      },
+      {
         path: 'advance-table',
         loadChildren: () =>
           import('./advance-table/advance-table.module').then(
@@ -36,6 +43,13 @@ const routes: Routes = [
         loadChildren: () =>
           import('./multilevel/multilevel.module').then(
             (m) => m.MultilevelModule
+          ),
+      },
+      {
+        path: 'pages',
+        loadChildren: () =>
+          import('./pages/pages.module').then(
+            (m) => m.PagesModule
           ),
       },
     ],

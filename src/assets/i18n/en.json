@@ -5,20 +5,35 @@
     }
   },
   "MENUITEMS": {
-    "USER":{
-      "POST": "Manager"
-    },
     "MAIN": {
       "TEXT": "MENU"
     },
-    "HOME": {
-      "TEXT": "Home",
+
+
+    "DASHBOARD": {
+      "TEXT": "Dashboard"
+    },
+    "CATEGORY": {
+      "TEXT": "Category"
+    },
+    "PAYMENT": {
+      "TEXT": "Order"
+    },
+    "PRODUCT": {
+      "TEXT": "Product"
+    },
+    "USER": {
+      "TEXT": "User & Role",
       "LIST": {
-        "DASHBOARD1": "Dashboard 1",
-        "DASHBOARD2": "Dashboard 2",
-        "DASHBOARD3": "Dashboard 3"
+        "USERS": "Users",
+        "ROLE": "Role"
       }
     },
+
+
+
+
+
     "ADVANCE-TABLE": {
       "TEXT": "Advance Table"
     },
