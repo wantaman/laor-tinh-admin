@@ -4,7 +4,7 @@ export const ROUTES: RouteInfo[] = [
   {
     path: '/dashboard/main',
     title: 'MENUITEMS.DASHBOARD.TEXT',
-    icon: '',
+    icon: '<i class="far fa-images"></i>',
     class: '',
     groupTitle: false,
     submenu: [],

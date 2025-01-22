@@ -76,7 +76,7 @@ export class CategoryListComponent {
       page_size: this.page_size,
       search: this.search_key
     }
-    this.allService.getAllDataWithFilter(this.allService.productUrl, filter).subscribe(
+    this.allService.getAllDataWithFilter(this.allService.categoryUrl, filter).subscribe(
       (data: any) => {
         this.total_record = data;
         console.log('data category', data)

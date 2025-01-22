@@ -43,12 +43,8 @@
                                 <thead>
                                     <tr>
                                         <th width="30px" class="text-center">#</th>
-                                        <th width="100px" class="text-center">{{'Image' | translate}}</th>
-                                        <th width="130px">{{'Name' | translate}}</th>
-                                        <th width="60px">{{'Category' | translate}}</th>
-                                        <th width="50px" class="text-end">{{'Price' | translate}}</th>
-                                        <th width="50px" class="text-end">{{'Discount' | translate}}</th>
-                                        <th width="50px" class="text-end">{{'Instock' | translate}}</th>
+                                        <th width="120px">{{'Category Name' | translate}}</th>
+                                        <th width="80px">{{'Created' | translate}}</th>
                                         <th width="60px" class="text-center"> {{'Action' | translate}} </th>
                                     </tr>
                                 </thead>
@@ -57,19 +53,8 @@
                                         <th width="10px" class="text-center" scope="row">
                                             {{ data.index }}
                                         </th>
-                                        <td class="text-center">
-                                            <div class="box_show_img">
-                                                <img *ngIf="data.thumbnail == null" class="table-img"
-                                                   
-                                                    [src]="data.data.thumbnail">
-                                                <img *ngIf="data.thumbnail != null" class="table-img" [src]="data.thumbnail">
-                                            </div>
-                                        </td>
-                                        <td>{{data.name}}</td>
-                                        <td class="text-overflow">{{data.categoryName}}</td>
-                                        <td class="text-end">{{data.unitPrice}}</td>
-                                        <td class="text-end">{{data.discount}}</td>
-                                        <td class="text-end">{{data.inStock}}</td>
+                                        <td class="text-overflow">{{data.name}}</td>
+                                        <td>{{data.createdDate}}</td>
                                         <td class="text-center">
                                             <button container="body" (click)="openForm('edit',data)"
                                                 matTooltipPosition="above" 

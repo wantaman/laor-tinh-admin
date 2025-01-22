@@ -60,11 +60,11 @@ export class AllService {
     }
 
     editData(url: any, data: any, id: any) {
-        return this.http.patch(this.finalBaseApi + url + id + '/', data);
+        return this.http.patch(this.finalBaseApi + url + id , data);
     }
 
     deleteData(url: any, id: any) {
-        return this.http.delete(this.finalBaseApi + url + id + '/')
+        return this.http.delete(this.finalBaseApi + url + id )
     }
 
     getAllDataWithoutFilter(url: any) {

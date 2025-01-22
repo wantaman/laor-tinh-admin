@@ -76,7 +76,7 @@ export class ProductListComponent {
       page_size: this.page_size,
       search: this.search_key
     }
-    this.allService.getAllDataWithFilter(this.allService.productUrl, filter).subscribe(
+    this.allService.getAllDataWithFilter(this.allService.productUrl, '').subscribe(
       (data: any) => {
         this.total_record = data;
         console.log('data category', data)
@@ -99,7 +99,7 @@ export class ProductListComponent {
     let tmp_DialogData: any = {
       size: "medium",
       type: type,
-      form_name: 'category-form'
+      form_name: 'product-form'
     }
     const dialogRef = this.dialog.open(ProductFormComponent,
       this.allFunction.dialogData(
@@ -151,8 +151,9 @@ export class ProductListComponent {
 
   
   deleteData(id: any) {
-    this.allService.deleteData(this.allService.categoryUrl, id).subscribe(
+    this.allService.deleteData(this.allService.productUrl +'/',id).subscribe(
       data => {
+        console.log('deleted data', data)
         this.toastSerivce.typeSuccessDelete();
         this.refresh()
       },
