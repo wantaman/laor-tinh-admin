@@ -43,6 +43,7 @@ export class HeaderComponent
   isOpenSidebar?: boolean;
   docElement: HTMLElement | undefined;
   isFullScreen = false;
+
   constructor(
     @Inject(DOCUMENT) private document: Document,
     private renderer: Renderer2,
@@ -54,7 +55,10 @@ export class HeaderComponent
     public languageService: LanguageService
   ) {
     super();
+ 
   }
+
+
   listLang = [
     { text: 'English', flag: 'assets/images/flags/us.jpg', lang: 'en' },
     { text: 'Spanish', flag: 'assets/images/flags/spain.jpg', lang: 'es' },
@@ -163,11 +167,16 @@ export class HeaderComponent
       localStorage.setItem('collapsed_menu', 'true');
     }
   }
+
   logout() {
-    this.subs.sink = this.authService.logout().subscribe((res) => {
-      if (!res.success) {
-        this.router.navigate(['/authentication/signin']);
-      }
-    });
+    this.authService.logout()
   }
+
+  // logout() {
+  //   this.subs.sink = this.authService.logout().subscribe((res) => {
+  //     if (!res.success) {
+  //       this.router.navigate(['/authentication/signin']);
+  //     }
+  //   });
+  // }
 }

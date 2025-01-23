@@ -4,6 +4,8 @@ import { BehaviorSubject, Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { User } from '../models/user';
 import { environment } from 'environments/environment';
+import { Router } from '@angular/router';
+import { GeneralFunctionService } from './general-function.service';
 
 @Injectable({
   providedIn: 'root',
@@ -13,7 +15,7 @@ export class AuthService {
   public currentUser: Observable<User>;
   baseApi = environment.baseAPI; 
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private router:Router, private allFunction: GeneralFunctionService) {
     this.currentUserSubject = new BehaviorSubject<User>(
       JSON.parse(localStorage.getItem('currentUser') || '{}')
     );
@@ -27,10 +29,25 @@ export class AuthService {
   login(data: any, option:any) {
     return this.http.post(this.baseApi+'api/auth/login', data, option);
   }
+
   logout() {
-    // remove user from local storage to log user out
-    localStorage.removeItem('currentUser');
-    this.currentUserSubject.next(this.currentUserValue);
-    return of({ success: false });
+    // this._firebaseAuth.signOut();
+    // this.router.navigate(['YOUR_LOGOUT_URL']);
+
+    // token user
+    console.log("logout")
+    localStorage.removeItem('token'); 
+    // let rememberpsw = this.allFunction.checkRememberPassword();
+    localStorage.clear();
+    // if(rememberpsw != false){
+    //     this.allFunction.setUsernameAndPassword(rememberpsw.username,rememberpsw.password)
+    // }
+    if(!localStorage.getItem('token')){
+      this.router.navigate(['/authentication/signin']);
+      // window.location.reload(); 
+      console.log("no token") 
+    }  
   }
+
+
 }

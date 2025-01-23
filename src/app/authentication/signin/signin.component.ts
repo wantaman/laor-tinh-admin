@@ -31,6 +31,7 @@ export class SigninComponent implements OnInit {
   tableData: any;
   logo: any;
   token: any;
+  user:any;
   keyEncrypt = environment.localEncriptKey;
 
   constructor(
@@ -88,6 +89,8 @@ export class SigninComponent implements OnInit {
             // const permission = JSON.stringify(data);
             // const encryptedPermission = this.generalService.encryptFileForLocal(this.keyEncrypt, permission);
             this.token = data.data.accessToken;
+            this.user = data.data.user;
+            localStorage.setItem('user', JSON.stringify(this.user))
             localStorage.setItem('token', this.token)
           
             this.router.navigate(['dashboard/main'])

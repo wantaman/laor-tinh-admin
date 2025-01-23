@@ -73,12 +73,12 @@ export class ProductListComponent {
     this.loadingGet = true;
     let filter = {
       page: this.page,
-      page_size: this.page_size,
-      search: this.search_key
+      size: this.page_size,
+      keyword: this.search_key
     }
-    this.allService.getAllDataWithFilter(this.allService.productUrl, '').subscribe(
+    this.allService.getAllDataWithFilter(this.allService.productUrl, filter).subscribe(
       (data: any) => {
-        this.total_record = data;
+        this.total_record = data.paging.total;
         console.log('data category', data)
         this.tableData = data['data'].map((item: { index: any; }, index: number) => {
           item.index = (this.page_size * (this.page - 1)) + (index + 1);

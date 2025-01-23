@@ -22,15 +22,7 @@ export class CategoryFormComponent {
 
   inputGroup = new FormGroup({
     name: new FormControl('', Validators.required),
-    price: new FormControl('', Validators.required),
-    discount: new FormControl(''),
-    categoryId: new FormControl(''),
-    nameColor: new FormControl(''),
-    valueColor: new FormControl(''),
-    description: new FormControl(''),
-    quantity: new FormControl('')
   })
-  selectedImage: any;
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public dataDetail: any,
@@ -48,54 +40,22 @@ export class CategoryFormComponent {
     else if (this.type == 'edit') {
       this.importData = this.dataDetail.data
       this.getDataDetail()
-      // console.log('data detial', this.importData)
-      this.getImageUrl(this.importData);
 
     }
   }
 
   ngOnInit() {
-    this.getAllCate();
+
   }
 
   get f() {
     return this.inputGroup.controls
   }
 
-  getAllCate() {
-    this.allService.getAllData(this.allService.categoryUrl).subscribe(
-      (data: any) => {
-        this.cateList = data.data;
-        console.log('data', this.cateList)
-      }
-    )
-  }
-
-
-
-  onImageSelected(event: any) {
-    const files = event.target.files;
-    if (files.length > 0) {
-      this.selectedImage = files[0];
-      this.getImageUrl({ thumbnail: this.selectedImage });
-    }
-  }
-
-  getImageUrl(slideShow: any) {
-    if (this.selectedImage) {
-      this.imageUrl = URL.createObjectURL(this.selectedImage);
-    } else {
-      if (slideShow.thumbnail) {
-        this.imageUrl = slideShow.thumbnail;
-      } else {
-        this.imageUrl = 'assets/images/no-image.jpg';
-      }
-    }
-  }
 
   getDataDetail() {
     this.loadingGet.push()
-    this.allService.getDataById(this.allService.productUrl, '/' + this.importData.id).subscribe(
+    this.allService.getDataById(this.allService.categoryUrl, '/' + this.importData.id).subscribe(
       data => {
         this.importData = data
         this.setDataIntoForm()
@@ -111,33 +71,17 @@ export class CategoryFormComponent {
 
   setDataIntoForm() {
     this.f.name.setValue(this.importData.data.name)
-    this.f.price.setValue(this.importData.data.unitPrice)
-    this.f.categoryId.setValue(this.importData.data.categoryName)
-    this.f.discount.setValue(this.importData.data.discount)
-    this.f.description.setValue(this.importData.data.description)
   }
 
   createData() {
     if (this.isValid()) {
       this.loading()
       const tmp_data = {
-        "name": this.f.name.value,
-        "price": this.f.price.value,
-        "discount": this.f.discount.value,
-        "categoryId": this.f.categoryId.value,
-        "quantity": this.f.quantity.value,
-        "optionProducts": [
-          {
-            "name": this.f.nameColor.value,
-            "value": this.f.valueColor.value,
-            "thumbnail": "thumbnail.jpg"
-          }
-        ],
-        "description": this.f.description.value
+        "name": this.f.name.value
       }
       console.log('json data', tmp_data)
 
-      this.allService.createData(this.allService.productUrl, tmp_data).subscribe(
+      this.allService.createData(this.allService.categoryUrl, tmp_data).subscribe(
         (data: any) => {
           console.log('data', data)
           this.isRefreshTable = true;
@@ -145,24 +89,6 @@ export class CategoryFormComponent {
           this.importData = data
           this.ToastrService.typeSuccessCreate()
           this.loaded()
-          const ProdID = data.data.id
-
-          if (this.selectedImage) {
-            const inputData = new FormData();
-            inputData.append("files", this.selectedImage);
-
-            this.allService.createData(this.allService.productUrl + '/' + ProdID + '/images', inputData).subscribe(
-                (imageData: any) => {
-                  this.ToastrService.typeSuccessCreate()
-                  console.log("Image uploaded successfully", imageData);
-                },
-                (imageError: any) => {
-                  console.error("Image upload failed", imageError);
-                }
-              );
-          } else {
-            this.ToastrService.typeSuccessCreate()
-          }
         },
         err => {
           this.ToastrService.typeErrorCreate()
@@ -179,42 +105,14 @@ export class CategoryFormComponent {
       this.loading();
       const tmp_data = {
         "name": this.f.name.value,
-        "price": this.f.price.value,
-        "discount": this.f.discount.value,
-        "categoryId": this.f.categoryId.value,
-        // "optionProducts": [
-        //   {
-        //     "name": this.f.nameColor.value,
-        //     "value": this.f.valueColor.value,
-        //     "thumbnail": "thumbnail.jpg"
-        //   }
-        // ],
-        "description": this.f.description.value
       }
 
-      this.allService.editData(this.allService.productUrl+'/', tmp_data, this.importData.data.id).subscribe(
+      this.allService.editData(this.allService.categoryUrl+'/', tmp_data, this.importData.data.id).subscribe(
         data => {
           console.log('data', data);
           this.isRefreshTable = true;
           this.ToastrService.typeSuccessEdit();
           this.loaded();
-
-          if (this.selectedImage) {
-            const inputData = new FormData();
-            inputData.append("files", this.selectedImage);
-
-            this.allService.createData(this.allService.productUrl + '/' + this.importData.id + '/images', inputData).subscribe(
-                (imageData: any) => {
-                  this.ToastrService.typeSuccessCreate()
-                  console.log("Image uploaded successfully", imageData);
-                },
-                (imageError: any) => {
-                  console.error("Image upload failed", imageError);
-                }
-              );
-          } else {
-            this.ToastrService.typeSuccessCreate()
-          }
         },
         err => {
           this.ToastrService.typeErrorEdit()

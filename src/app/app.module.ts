@@ -37,11 +37,29 @@ import { ProductFormComponent } from './pages/product/product-form/product-form.
 import { ProductListComponent } from './pages/product/product-list/product-list.component';
 import { OrderFormComponent } from './pages/order/order-form/order-form.component';
 import { OrderListComponent } from './pages/order/order-list/order-list.component';
-import { ToastrModule } from 'ngx-toastr';
+import { ToastrModule } from 'ngx-toastr';;
+import { 
+  Home, 
+  Tag, 
+  Box, 
+  ShoppingBag, 
+  User, 
+  Shield 
+} from 'angular-feather/icons';
 
+import { FeatherModule } from 'angular-feather';
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, 'assets/i18n/', '.json');
 }
+
+const icons = {
+  Home, 
+  Tag, 
+  Box, 
+  ShoppingBag, 
+  User, 
+  Shield 
+};
 
 @NgModule({
   declarations: [
@@ -64,7 +82,7 @@ export function createTranslateLoader(http: HttpClient) {
     ProductListComponent,
     OrderFormComponent,
     OrderListComponent,
- 
+
   ],
   imports: [
     BrowserModule,
@@ -73,6 +91,7 @@ export function createTranslateLoader(http: HttpClient) {
     HttpClientModule,
     LoadingBarRouterModule,
     NgScrollbarModule,
+    FeatherModule.pick(icons),
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
@@ -80,7 +99,7 @@ export function createTranslateLoader(http: HttpClient) {
         deps: [HttpClient],
       },
     }),
-    ToastrModule.forRoot(), 
+    ToastrModule.forRoot(),
     CoreModule,
     SharedModule,
   ],
@@ -89,6 +108,7 @@ export function createTranslateLoader(http: HttpClient) {
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
     fakeBackendProvider,
   ],
+  exports: [FeatherModule],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }

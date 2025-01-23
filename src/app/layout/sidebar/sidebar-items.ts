@@ -1,66 +1,60 @@
 import { RouteInfo } from './sidebar.metadata';
+import { 
+  Home, 
+  Tag, 
+  Box, 
+  ShoppingCart, 
+  User, 
+  Shield 
+} from 'angular-feather/icons'; // Import Feather icons
 
 export const ROUTES: RouteInfo[] = [
   {
     path: '/dashboard/main',
     title: 'MENUITEMS.DASHBOARD.TEXT',
-    icon: '<i class="far fa-images"></i>',
+    icon: 'Home', // Feather icon
     class: '',
     groupTitle: false,
     submenu: [],
   },
-
   {
     path: '/pages/category',
     title: 'MENUITEMS.CATEGORY.TEXT',
-    icon: 'monitor',
+    icon: 'Tag', // Feather icon
     class: '',
     groupTitle: false,
     submenu: [],
   },
-
   {
     path: '/pages/product',
     title: 'MENUITEMS.PRODUCT.TEXT',
-    icon: '',
+    icon: 'Box', // Feather icon
     class: '',
     groupTitle: false,
     submenu: [],
   },
-
   {
-    path: '/pages/payment',
+    path: '/pages/order',
     title: 'MENUITEMS.PAYMENT.TEXT',
-    icon: '',
+    icon: 'Box',
     class: '',
     groupTitle: false,
     submenu: [],
   },
-
   {
-    path: '',
+    path: '/pages/user',
     title: 'MENUITEMS.USER.TEXT',
-    icon: '',
-    class: 'menu-toggle',
+    icon: 'User', 
+    class: '',
     groupTitle: false,
-    submenu: [
-      {
-        path: '/pages/user',
-        title: 'MENUITEMS.USER.LIST.USERS',
-        icon: '',
-        class: 'ml-menu',
-        groupTitle: false,
-        submenu: [],
-      },
-      {
-        path: '/pages/role',
-        title: 'MENUITEMS.USER.LIST.ROLE',
-        icon: '',
-        class: 'ml-menu',
-        groupTitle: false,
-        submenu: [],
-      }
-    ],
+    submenu: []
   },
-
+  {
+    path: '/pages/role',
+    title: 'MENUITEMS.ROLE.TEXT',
+    icon: 'Shield', // Feather icon
+    class: '',
+    groupTitle: false,
+    submenu: [],
+  },
 ];

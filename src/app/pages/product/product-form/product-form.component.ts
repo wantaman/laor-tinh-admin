@@ -113,7 +113,7 @@ export class ProductFormComponent {
   setDataIntoForm() {
     this.f.name.setValue(this.importData.data.name)
     this.f.price.setValue(this.importData.data.unitPrice)
-    this.f.categoryId.setValue(this.importData.data.categoryName)
+    this.f.categoryId.setValue(this.importData.data.category.id)
     this.f.discount.setValue(this.importData.data.discount)
     this.f.description.setValue(this.importData.data.description)
   }
@@ -142,11 +142,11 @@ export class ProductFormComponent {
         (data: any) => {
           console.log('data', data)
           this.isRefreshTable = true;
-          this.type = 'edit'
-          this.importData = data
-          this.ToastrService.typeSuccessCreate()
-          this.loaded()
-          const ProdID = data.data.id
+          this.type = 'edit';
+          this.importData = data;
+          // this.ToastrService.typeSuccessCreate()
+          this.loaded();
+          const ProdID = data.data.id;
 
           if (this.selectedImage) {
             const inputData = new FormData();
@@ -193,18 +193,20 @@ export class ProductFormComponent {
         "description": this.f.description.value
       }
 
+      console.log('data json test', tmp_data)
+
       this.allService.editData(this.allService.productUrl+'/', tmp_data, this.importData.data.id).subscribe(
         data => {
           console.log('data', data);
           this.isRefreshTable = true;
-          this.ToastrService.typeSuccessEdit();
+          // this.ToastrService.typeSuccessEdit();
           this.loaded();
 
           if (this.selectedImage) {
             const inputData = new FormData();
             inputData.append("files", this.selectedImage);
 
-            this.allService.createData(this.allService.productUrl + '/' + this.importData.id + '/images', inputData).subscribe(
+            this.allService.createData(this.allService.productUrl + '/' + this.importData.data.id + '/images', inputData).subscribe(
                 (imageData: any) => {
                   this.ToastrService.typeSuccessCreate()
                   console.log("Image uploaded successfully", imageData);

@@ -13,7 +13,10 @@ export class AllService {
 
     productUrl = 'api/products';
     categoryUrl = 'api/categories';
-    userUrl = 'api/users/profile'
+    userUrl = 'api/users'
+    orderUrl = 'api/orders'
+    roleUrl = 'api/roles'
+    orderStatusUrl = 'api/orders/order-status/'
 
     constructor(
         private http: HttpClient,
@@ -60,7 +63,7 @@ export class AllService {
     }
 
     editData(url: any, data: any, id: any) {
-        return this.http.patch(this.finalBaseApi + url + id , data);
+        return this.http.put(this.finalBaseApi + url + id , data);
     }
 
     deleteData(url: any, id: any) {

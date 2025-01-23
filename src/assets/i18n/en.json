@@ -23,13 +23,12 @@
       "TEXT": "Product"
     },
     "USER": {
-      "TEXT": "User & Role",
-      "LIST": {
-        "USERS": "Users",
-        "ROLE": "Role"
-      }
+      "TEXT": "User"
     },
 
+    "ROLE": {
+      "TEXT": "Role"
+    },
 
 
 

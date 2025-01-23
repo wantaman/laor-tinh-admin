@@ -27,6 +27,9 @@ export class SidebarComponent implements OnInit, OnDestroy {
   listMaxWidth?: string;
   headerHeight = 60;
   routerObj;
+  nameUser:any;
+  avatar:any;
+  greeting: any;
 
   constructor(
     @Inject(DOCUMENT) private document: Document,
@@ -41,6 +44,20 @@ export class SidebarComponent implements OnInit, OnDestroy {
         this.renderer.removeClass(this.document.body, 'overlay-open');
       }
     });
+
+    this.loadUserData()
+  }
+
+  
+  loadUserData(){
+    const user = localStorage.getItem('user');
+    if(user){
+      const parsedUser = JSON.parse(user);
+      this.nameUser = parsedUser.name;
+      this.avatar = parsedUser.avatar;
+
+      console.log('name user', this.nameUser)
+    }
   }
 
   @HostListener('window:resize', ['$event'])
@@ -73,7 +90,22 @@ export class SidebarComponent implements OnInit, OnDestroy {
     }
     this.initLeftSidebar();
     this.bodyTag = this.document.body;
+
+    this.setGreeting();
   }
+
+
+  setGreeting(): void {
+    const time = new Date().getHours();
+    if (time < 12) {
+      this.greeting = "Good morning!";
+    } else if (time < 18) {
+      this.greeting = "Good afternoon!";
+    } else {
+      this.greeting = "Good evening!";
+    }
+  }
+
   ngOnDestroy() {
     this.routerObj.unsubscribe();
   }
