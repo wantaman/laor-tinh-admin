@@ -17,6 +17,7 @@ export class AllService {
     orderUrl = 'api/orders'
     roleUrl = 'api/roles'
     orderStatusUrl = 'api/orders/order-status/'
+    reportUrl= 'api/reports';
 
     constructor(
         private http: HttpClient,
